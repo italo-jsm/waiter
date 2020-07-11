@@ -6,6 +6,7 @@ import com.italo.waiter.model.Product;
 import com.italo.waiter.repository.CommandItemRepository;
 import com.italo.waiter.repository.ConsumintUnitRepository;
 import com.italo.waiter.repository.ProductRepository;
+import com.italo.waiter.utils.CSVParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

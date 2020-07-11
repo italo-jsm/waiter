@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -20,5 +21,9 @@ public class ProductService {
 
     public List<Product> findAllProducts(){
         return productRepository.findAll();
+    }
+
+    public Optional<Product> findProductById(Long id){
+        return productRepository.findById(id);
     }
 }
