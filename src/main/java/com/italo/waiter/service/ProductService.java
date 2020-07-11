@@ -1,0 +1,24 @@
+package com.italo.waiter.service;
+
+import com.italo.waiter.model.Product;
+import com.italo.waiter.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ProductService {
+
+    private final ProductRepository productRepository;
+
+    @Autowired @Lazy
+    public ProductService(final ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    public List<Product> findAllProducts(){
+        return productRepository.findAll();
+    }
+}
