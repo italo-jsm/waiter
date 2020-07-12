@@ -47,4 +47,11 @@ public class SystemUserController {
                     }
                 });
     }
+
+    @PutMapping
+    public ResponseEntity<?> updateUser(@RequestBody SystemUser user){
+        return Optional.ofNullable(systemUserService.updateUser(user))
+                .map(systemUser -> ResponseEntity.ok().build())
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

@@ -52,7 +52,7 @@ public class CommandItem extends AbstractEntity{
     @Override
     public String toString() {
         return "CommandItem{" +
-                "id=" + id +
+                "id=" + this.getId() +
                 "quantity=" + quantity +
                 ", product=" + product +
                 '}';

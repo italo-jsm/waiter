@@ -73,7 +73,7 @@ public class ConsumingUnit extends AbstractEntity{
     @Override
     public String toString() {
         return "ConsumingUnit{" +
-                "id=" + id +
+                "id=" + this.getId() +
                 "number=" + number +
                 ", peoples=" + peoples +
                // ", commandItems=" + commandItems +

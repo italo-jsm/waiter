@@ -1,10 +1,10 @@
 package com.italo.waiter.service;
 
-import com.italo.waiter.model.Product;
 import com.italo.waiter.model.SystemUser;
 import com.italo.waiter.repository.SystemUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class SystemUserService {
 
-    private SystemUserRepository systemUserRepository;
+    private final SystemUserRepository systemUserRepository;
 
     @Autowired @Lazy
     public SystemUserService(SystemUserRepository systemUserRepository) {
@@ -23,5 +23,13 @@ public class SystemUserService {
         return systemUserRepository.findById(id);
     }
 
+    public SystemUser updateUser(SystemUser user){
+        return Optional.ofNullable(systemUserRepository.findByUsername(user.getUsername()))
+                .map(systemUser -> {
+                    systemUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+                    systemUser.setRegistrationNumber(user.getRegistrationNumber());
+                    return systemUserRepository.save(systemUser);
+                }).orElse(null);
+    }
 
 }
