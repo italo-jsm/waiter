@@ -14,6 +14,8 @@ public class CommandItem extends AbstractEntity{
     private Product product;
     @OneToOne @JsonIgnore
     private ConsumingUnit consumingUnit;
+    @OneToOne
+    private SystemUser registeredBy;
 
     public Integer getQuantity() {
         return quantity;
@@ -37,6 +39,14 @@ public class CommandItem extends AbstractEntity{
 
     public void setConsumingUnit(ConsumingUnit consumingUnit) {
         this.consumingUnit = consumingUnit;
+    }
+
+    public SystemUser getRegisteredBy() {
+        return registeredBy;
+    }
+
+    public void setRegisteredBy(SystemUser registeredBy) {
+        this.registeredBy = registeredBy;
     }
 
     @Override

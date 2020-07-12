@@ -1,12 +1,12 @@
 package com.italo.waiter.model;
 
-import org.hibernate.Hibernate;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+
+import com.italo.waiter.utils.enums.UnitStatus;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +16,11 @@ public class ConsumingUnit extends AbstractEntity{
     private Integer peoples;
     @OneToMany(mappedBy = "consumingUnit", fetch = FetchType.LAZY)
     private List<CommandItem> commandItems = new ArrayList<>();
+    @OneToOne
+    private SystemUser openedBy;
+    @OneToOne
+    private SystemUser closedBy;
+    private UnitStatus status;
 
     public Integer getNumber() {
         return number;
@@ -41,6 +46,30 @@ public class ConsumingUnit extends AbstractEntity{
         this.commandItems = commandItems;
     }
 
+    public SystemUser getOpenedBy() {
+        return openedBy;
+    }
+
+    public void setOpenedBy(SystemUser openedBy) {
+        this.openedBy = openedBy;
+    }
+
+    public UnitStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UnitStatus status) {
+        this.status = status;
+    }
+
+    public SystemUser getClosedBy() {
+        return closedBy;
+    }
+
+    public void setClosedBy(SystemUser closedBy) {
+        this.closedBy = closedBy;
+    }
+
     @Override
     public String toString() {
         return "ConsumingUnit{" +
@@ -51,8 +80,4 @@ public class ConsumingUnit extends AbstractEntity{
                 '}';
     }
 
-    public ConsumingUnit loadCommandItens(){
-        Hibernate.initialize(commandItems);
-        return this;
-    }
 }
