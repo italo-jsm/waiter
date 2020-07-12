@@ -1,12 +1,18 @@
 package com.italo.waiter.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class SystemUser {
+public class SystemUser extends AbstractEntity{
     private String username;
     private String password;
     private String registrationNumber;
+    @ManyToMany
+    private List<Role> roles = new ArrayList<>();
 
     public String getUsername() {
         return username;
@@ -30,6 +36,14 @@ public class SystemUser {
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
