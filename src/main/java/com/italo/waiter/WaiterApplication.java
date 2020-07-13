@@ -30,6 +30,9 @@ public class WaiterApplication implements CommandLineRunner {
 
 	@Override
 	public void run(final String... args) {
-		CSVParser.parseProducts().forEach(product -> productRepository.save(product));
+		CSVParser.parseProducts().forEach(product -> {
+		    System.out.println("Saving product: " + product.getId());
+		    productRepository.save(product);
+		});
 	}
 }
