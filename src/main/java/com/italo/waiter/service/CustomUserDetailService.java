@@ -42,7 +42,6 @@ public class CustomUserDetailService implements UserDetailsService {
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
 				.createAuthorityList(rolesAsString);
 		User admin = new User(user.getUsername(), user.getPassword(), grantedAuthorities);
-		logger.info(admin.toString());
 		return admin;
 	}
 
