@@ -24,7 +24,7 @@ public class SystemUserService {
     }
 
     public SystemUser updateUser(SystemUser user){
-        return Optional.ofNullable(systemUserRepository.findByUsername(user.getUsername()))
+        return systemUserRepository.findByUsername(user.getUsername())
                 .map(systemUser -> {
                     systemUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
                     systemUser.setRegistrationNumber(user.getRegistrationNumber());

@@ -1,6 +1,5 @@
 package com.italo.waiter.model;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;

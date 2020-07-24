@@ -37,11 +37,10 @@ public class ConsumingUnitService {
 
     public Optional<ConsumingUnit> openConsumingUnit(Long consumingUnitId, SystemUser systemUser){
         return consumintUnitRepository.findById(consumingUnitId)
-                .map(consumingUnit -> {
+                .flatMap(consumingUnit -> {
                     consumingUnit.setStatus(UnitStatus.OPENED);
-                    consumingUnit.setOpenedBy(systemUser);
                     return Optional.of(consumingUnit);
-                }).orElseGet(Optional::empty);
+                });
     }
 
     public Long createConsumingUnit(ConsumingUnit consumingUnit) {

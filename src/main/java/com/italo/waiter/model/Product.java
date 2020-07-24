@@ -9,7 +9,6 @@ public class Product extends AbstractEntity{
     private String code;
     private String description;
     private Double saleCost;
-    @JsonIgnore
     private Double productionCost;
 
     public String getCode() {

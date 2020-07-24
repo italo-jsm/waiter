@@ -11,7 +11,7 @@ public class SystemUser extends AbstractEntity{
     private String username;
     private String password;
     private String registrationNumber;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 
     public String getUsername() {

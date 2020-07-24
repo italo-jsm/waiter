@@ -35,7 +35,7 @@ public class SystemUserController {
 
     @PostMapping
     public ResponseEntity<?> saveUser(@RequestBody SystemUser user){
-        return Optional.ofNullable(systemUserRepository.findByUsername(user.getUsername()))
+        return systemUserRepository.findByUsername(user.getUsername())
                 .map(systemUser -> ResponseEntity.badRequest().build())
                 .orElseGet(() -> {
                     user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
