@@ -1,6 +1,5 @@
 package com.italo.waiter.controllers;
 
-import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.model.dto.ConsumingUnitDto;
 import com.italo.waiter.service.ConsumingUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class ConsumingUnitController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> getAllConsumingUnit(@PathVariable Long id){
+    public ResponseEntity<?> getAllConsumingUnit(){
         return ResponseEntity.ok(consumingUnitService.getAllConsumingUnits());
     }
 

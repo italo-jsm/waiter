@@ -1,8 +1,9 @@
-package com.italo.waiter.service;
+package com.italo.waiter.service.builder.service;
 
 import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.repository.CommandItemRepository;
 import com.italo.waiter.repository.ConsumintUnitRepository;
+import com.italo.waiter.service.ConsumingUnitService;
 import com.italo.waiter.service.builder.ConsumingUnitServiceTestBuilder;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,7 +29,6 @@ public class ConsumingUnitServiceTest {
     CommandItemRepository commandItemRepository;
 
     @InjectMocks
-    @Spy
     ConsumingUnitService consumingUnitService;
 
     @Test

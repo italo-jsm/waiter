@@ -3,6 +3,7 @@ package com.italo.waiter.service.builder;
 import com.italo.waiter.model.CommandItem;
 import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.model.Product;
+import com.italo.waiter.model.dto.ConsumingUnitDto;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,5 +29,12 @@ public class ConsumingUnitServiceTestBuilder {
         product.setDescription("Description");
         product.setCode("code");
         return product;
+    }
+
+    public static ConsumingUnitDto generateConsumingUnitDto() {
+        ConsumingUnitDto consumingUnitDto = new ConsumingUnitDto();
+        consumingUnitDto.setNumber(1);
+        consumingUnitDto.setPeople(2);
+        return consumingUnitDto;
     }
 }
