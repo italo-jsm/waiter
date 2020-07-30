@@ -1,6 +1,7 @@
 package com.italo.waiter.model;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.italo.waiter.utils.enums.UnitStatus;
 
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class ConsumingUnit extends AbstractEntity{
     private SystemUser openedBy;
     @OneToOne
     private SystemUser closedBy;
-    private UnitStatus status;
+    private UnitStatus status = UnitStatus.OPENED;
 
     public Integer getNumber() {
         return number;

@@ -2,6 +2,7 @@ package com.italo.waiter.service;
 
 import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.model.SystemUser;
+import com.italo.waiter.model.dto.ConsumingUnitDto;
 import com.italo.waiter.repository.CommandItemRepository;
 import com.italo.waiter.repository.ConsumintUnitRepository;
 import com.italo.waiter.repository.SystemUserRepository;
@@ -43,8 +44,8 @@ public class ConsumingUnitService {
                 });
     }
 
-    public Long createConsumingUnit(ConsumingUnit consumingUnit) {
-        return consumintUnitRepository.save(consumingUnit).getId();
+    public Long createConsumingUnit(ConsumingUnitDto consumingUnitDto) {
+        return consumintUnitRepository.save(consumingUnitDto.toConsumingUnit()).getId();
     }
 
     public List<ConsumingUnit> getAllConsumingUnits(){

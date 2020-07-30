@@ -1,6 +1,7 @@
 package com.italo.waiter.controllers;
 
 import com.italo.waiter.model.ConsumingUnit;
+import com.italo.waiter.model.dto.ConsumingUnitDto;
 import com.italo.waiter.service.ConsumingUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -34,7 +35,7 @@ public class ConsumingUnitController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createConsumingUnit(@RequestBody ConsumingUnit consumingUnit) throws URISyntaxException {
+    public ResponseEntity<?> createConsumingUnit(@RequestBody ConsumingUnitDto consumingUnit) throws URISyntaxException {
         return ResponseEntity.created(new URI("consuming-units/" + Long.toString(consumingUnitService.createConsumingUnit(consumingUnit)))).build();
     }
 }
