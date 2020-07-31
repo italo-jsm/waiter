@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,7 +35,7 @@ public class ConsumingUnitServiceTest {
     @Test
     public void getConsumingUnitByIdShouldReturnConsumingUnit(){
         Mockito.doReturn(Optional.of(ConsumingUnitServiceTestBuilder.generateConsumingUnit())).when(consumintUnitRepository).findById(any());
-        Mockito.when(commandItemRepository.findByConsumingUnit(any())).thenReturn(ConsumingUnitServiceTestBuilder.generateCommandItens());
+        Mockito.when(commandItemRepository.findByConsumingUnit(any())).thenReturn(Collections.singletonList(ConsumingUnitServiceTestBuilder.generateCommandItem()));
         Optional<ConsumingUnit> consumingUnitById = consumingUnitService.getConsumingUnitById(1L);
         Assert.assertTrue(consumingUnitById.isPresent());
     }

@@ -17,11 +17,11 @@ public class ConsumingUnitServiceTestBuilder {
         return unit;
     }
 
-    public static List<CommandItem> generateCommandItens() {
+    public static CommandItem generateCommandItem() {
         CommandItem commandItem = new CommandItem();
         commandItem.setQuantity(3);
         commandItem.setProduct(generateProduct());
-        return Collections.singletonList(commandItem);
+        return commandItem;
     }
 
     private static Product generateProduct() {
