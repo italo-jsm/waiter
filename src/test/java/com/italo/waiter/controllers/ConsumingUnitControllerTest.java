@@ -1,4 +1,4 @@
-package com.italo.waiter.service.builder.controller;
+package com.italo.waiter.controllers;
 
 import com.italo.waiter.controllers.ConsumingUnitController;
 import com.italo.waiter.service.ConsumingUnitService;

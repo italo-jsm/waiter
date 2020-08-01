@@ -1,4 +1,4 @@
-package com.italo.waiter.service.builder.service;
+package com.italo.waiter.service;
 
 import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.repository.CommandItemRepository;

@@ -7,6 +7,7 @@ import com.italo.waiter.model.*;
 import com.italo.waiter.repository.ProductRepository;
 import com.italo.waiter.repository.RoleRepository;
 import com.italo.waiter.repository.SystemUserRepository;
+import com.italo.waiter.service.s3.S3Service;
 import com.italo.waiter.utils.CSVParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,9 @@ public class WaiterApplication implements CommandLineRunner {
 	@Autowired
 	SystemUserRepository systemUserRepository;
 
+	@Autowired
+	S3Service s3Service;
+
 	Logger logger = LoggerFactory.getLogger(WaiterApplication.class);
 
 	@Bean
@@ -52,23 +56,6 @@ public class WaiterApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		ConsumingUnit unit = new ConsumingUnit();
-		unit.setNumber(2);
-		unit.setPeoples(3);
-		CommandItem i1 = new CommandItem();
-		CommandItem i2 = new CommandItem();
-		Product p = new Product();
-		p.setDescription("Desc");
-		i1.setProduct(p);
-		i2.setProduct(p);
-		i1.setQuantity(2);
-		i2.setQuantity(1);
-		unit.getCommandItems().add(i1);
-		unit.getCommandItems().add(i2);
-
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-		String s = mapper.writeValueAsString(unit);
-		System.out.println();
+		s3Service.putObject();
 	}
 }

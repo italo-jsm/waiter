@@ -1,8 +1,8 @@
-package com.italo.waiter.service.builder.controller;
+package com.italo.waiter.controllers;
 
 import com.italo.waiter.controllers.CommandItemController;
 import com.italo.waiter.service.builder.ConsumingUnitServiceTestBuilder;
-import io.jsonwebtoken.lang.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -20,6 +20,6 @@ public class CommandItemControllerTest {
 
     @Test
     public void shouldAddCommandItemToConsumingUnit(){
-        Assert.isTrue(true);
+
     }
 }
