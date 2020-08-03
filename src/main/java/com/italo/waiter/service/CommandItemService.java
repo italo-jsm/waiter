@@ -27,12 +27,17 @@ public class CommandItemService {
 
     public Optional<CommandItem> addCommandItemToConsumingUnit(final Long consumingUnitId, final CommandItem commandItem){
         return consumintUnitRepository.findById(consumingUnitId)
-                .map(consumingUnit -> Optional.of(commandItemRepository.save(addConsumingUnit(commandItem, consumingUnit)))).orElseThrow(() -> new EntityNotFoundException("Consuming unit not found"));
+                .map(consumingUnit -> Optional.of(commandItemRepository.save(addConsumingUnit(commandItem, consumingUnit))))
+                .orElseThrow(() -> new EntityNotFoundException("Consuming unit not found"));
     }
 
     public Optional<CommandItem> removeCommandItemFromConsumingUnit(long consumingUnitId, CommandItem commandItem) {
         return consumintUnitRepository.findById((consumingUnitId))
-                .map(consumingUnit -> Optional.of(commandItemRepository.save(removeConsumingUnit(commandItem))))
+                .map(consumingUnit -> {
+                    //verifyCommandItem(commandItem, consumingUnit);
+                    commandItem.setConsumingUnit(null);
+                    return Optional.of(commandItemRepository.save(commandItem));
+                })
                 .orElseThrow(() -> new EntityNotFoundException("Consuming unit not found"));
     }
 
@@ -44,5 +49,11 @@ public class CommandItemService {
     CommandItem addConsumingUnit(CommandItem commandItem, ConsumingUnit consumingUnit) {
         commandItem.setConsumingUnit(consumingUnit);
         return commandItem;
+    }
+
+    void verifyCommandItem(CommandItem commandItem, ConsumingUnit consumingUnit){
+        if(!commandItem.getConsumingUnit().equals(consumingUnit)){
+            throw new RuntimeException("CommandItem is not from this consuming unit!");
+        }
     }
 }

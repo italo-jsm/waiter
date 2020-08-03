@@ -7,10 +7,7 @@ import com.italo.waiter.service.builder.ConsumingUnitServiceTestBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityNotFoundException;
@@ -28,7 +25,6 @@ public class CommandItemServiceTest {
     private ConsumintUnitRepository consumintUnitRepository;
 
     @InjectMocks
-    @Spy
     private CommandItemService commandItemService;
 
     @Test
@@ -37,7 +33,11 @@ public class CommandItemServiceTest {
         Mockito.when(commandItemRepository.save(any())).thenReturn(ConsumingUnitServiceTestBuilder.generateCommandItem());
         Optional<CommandItem> commandItem = commandItemService.addCommandItemToConsumingUnit(1L, ConsumingUnitServiceTestBuilder.generateCommandItem());
         Assert.assertTrue(commandItem.isPresent());
-        //Assert.assertEquals(1L, (long) commandItem.get().getConsumingUnit().getId());
+        ArgumentCaptor<CommandItem> commandItemArgumentCaptor = ArgumentCaptor.forClass(CommandItem.class);
+        Mockito.verify(commandItemRepository).save(commandItemArgumentCaptor.capture());
+        CommandItem capturedCommandItem = commandItemArgumentCaptor.getValue();
+        Assert.assertEquals(2, (int) capturedCommandItem.getConsumingUnit().getNumber());
+        Assert.assertEquals(2, (int) capturedCommandItem.getConsumingUnit().getPeoples());
     }
 
     @Test
@@ -57,7 +57,10 @@ public class CommandItemServiceTest {
         Mockito.when(commandItemRepository.save(any())).thenReturn(ConsumingUnitServiceTestBuilder.generateCommandItem());
         Optional <CommandItem> commandItem = commandItemService.removeCommandItemFromConsumingUnit(1L, ConsumingUnitServiceTestBuilder.generateCommandItem());
         Assert.assertTrue(commandItem.isPresent());
-        //Assert.assertNull(commandItem.get().getConsumingUnit()); //Perguntar como fazer este assert
+        ArgumentCaptor<CommandItem> commandItemArgumentCaptor = ArgumentCaptor.forClass(CommandItem.class);
+        Mockito.verify(commandItemRepository).save(commandItemArgumentCaptor.capture());
+        CommandItem capturedCommandItem = commandItemArgumentCaptor.getValue();
+        Assert.assertNull(capturedCommandItem.getConsumingUnit());
     }
 
     @Test

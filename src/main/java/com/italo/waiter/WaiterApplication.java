@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class WaiterApplication implements CommandLineRunner {
+public class WaiterApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WaiterApplication.class, args);
@@ -33,9 +33,6 @@ public class WaiterApplication implements CommandLineRunner {
 
 	@Autowired
 	SystemUserRepository systemUserRepository;
-
-	@Autowired
-	S3Service s3Service;
 
 	Logger logger = LoggerFactory.getLogger(WaiterApplication.class);
 
@@ -52,10 +49,5 @@ public class WaiterApplication implements CommandLineRunner {
 			u.setPassword(new BCryptPasswordEncoder().encode("password"));
 			systemUserRepository.save(u);
 		}
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		s3Service.putObject();
 	}
 }

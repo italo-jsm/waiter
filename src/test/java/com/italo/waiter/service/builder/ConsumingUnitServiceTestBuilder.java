@@ -21,6 +21,7 @@ public class ConsumingUnitServiceTestBuilder {
         CommandItem commandItem = new CommandItem();
         commandItem.setQuantity(3);
         commandItem.setProduct(generateProduct());
+        commandItem.setConsumingUnit(new ConsumingUnit());
         return commandItem;
     }
 
