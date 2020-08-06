@@ -65,7 +65,6 @@ public class CommandItemServiceTest {
 
     @Test
     public void shouldSetConsumingUnitToNull(){
-        CommandItem commandItem = ConsumingUnitServiceTestBuilder.generateCommandItem();
         CommandItem commandItemWithNullConsumingUnit = commandItemService.removeConsumingUnit(ConsumingUnitServiceTestBuilder.generateCommandItem());
         Assert.assertNull(commandItemWithNullConsumingUnit.getConsumingUnit());
     }
