@@ -4,14 +4,16 @@ import com.italo.waiter.model.CommandItem;
 import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.model.Product;
 import com.italo.waiter.model.dto.ConsumingUnitDto;
+import com.italo.waiter.utils.enums.UnitStatus;
 
-import java.util.Collections;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class ConsumingUnitServiceTestBuilder {
     public static ConsumingUnit generateConsumingUnit() {
         ConsumingUnit unit = new ConsumingUnit();
+        unit.setStatus(UnitStatus.CLOSED);
         unit.setNumber(2);
         unit.setPeoples(2);
         return unit;
@@ -21,7 +23,7 @@ public class ConsumingUnitServiceTestBuilder {
         CommandItem commandItem = new CommandItem();
         commandItem.setQuantity(3);
         commandItem.setProduct(generateProduct());
-        commandItem.setConsumingUnit(new ConsumingUnit());
+        commandItem.setConsumingUnit(generateConsumingUnit());
         return commandItem;
     }
 
@@ -37,5 +39,9 @@ public class ConsumingUnitServiceTestBuilder {
         consumingUnitDto.setNumber(1);
         consumingUnitDto.setPeople(2);
         return consumingUnitDto;
+    }
+
+    public static List<ConsumingUnit> generateConsumingUnitList(){
+        return Arrays.asList(new ConsumingUnit(), new ConsumingUnit(), new ConsumingUnit());
     }
 }

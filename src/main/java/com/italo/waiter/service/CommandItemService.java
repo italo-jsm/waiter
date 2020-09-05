@@ -34,7 +34,7 @@ public class CommandItemService {
     public Optional<CommandItem> removeCommandItemFromConsumingUnit(long consumingUnitId, CommandItem commandItem) {
         return consumintUnitRepository.findById((consumingUnitId))
                 .map(consumingUnit -> {
-                    //verifyCommandItem(commandItem, consumingUnit);
+                    verifyCommandItem(commandItem, consumingUnit);
                     commandItem.setConsumingUnit(null);
                     return Optional.of(commandItemRepository.save(commandItem));
                 })

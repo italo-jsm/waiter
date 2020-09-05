@@ -3,6 +3,7 @@ package com.italo.waiter.controllers;
 import com.italo.waiter.model.SystemUser;
 import com.italo.waiter.repository.SystemUserRepository;
 import com.italo.waiter.service.SystemUserService;
+import com.italo.waiter.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,10 @@ public class SystemUserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> findProductById(@PathVariable Long id){
-        return systemUserService.findProductById(id)
+    public ResponseEntity<?> findUserById(@PathVariable Long id){
+        return systemUserService.findUserById(id)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new NotFoundException("Usuario nao encontrado"));
     }
 
     @PostMapping

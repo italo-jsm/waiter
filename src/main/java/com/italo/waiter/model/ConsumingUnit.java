@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 public class ConsumingUnit extends AbstractEntity{
@@ -81,4 +83,28 @@ public class ConsumingUnit extends AbstractEntity{
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConsumingUnit unit = (ConsumingUnit) o;
+        return Objects.equals(number, unit.number) &&
+                Objects.equals(peoples, unit.peoples) &&
+                Objects.equals(openedBy, unit.openedBy) &&
+                Objects.equals(closedBy, unit.closedBy) &&
+                status == unit.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, peoples, commandItems, openedBy, closedBy, status);
+    }
+
+    public Double getTotalBill() {
+        return this.getCommandItems()
+                .stream()
+                .map(commandItem -> commandItem.getQuantity() * commandItem.getProduct().getSaleCost())
+                .reduce(Double::sum)
+                .orElseThrow(() -> new RuntimeException("Impossible Calc"));
+    }
 }

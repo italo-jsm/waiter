@@ -1,6 +1,7 @@
 package com.italo.waiter.service;
 
 import com.italo.waiter.model.CommandItem;
+import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.repository.CommandItemRepository;
 import com.italo.waiter.repository.ConsumintUnitRepository;
 import com.italo.waiter.service.builder.ConsumingUnitServiceTestBuilder;
@@ -73,5 +74,17 @@ public class CommandItemServiceTest {
     public void shouldAddConsumingUnit(){
         CommandItem commandItem = commandItemService.addConsumingUnit(ConsumingUnitServiceTestBuilder.generateCommandItem(), ConsumingUnitServiceTestBuilder.generateConsumingUnit());
         Assert.assertNotNull(commandItem.getConsumingUnit());
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenCommandItemIsNotFromConsumingUnit(){
+        Mockito.when(consumintUnitRepository.findById(any())).thenReturn(Optional.of(new ConsumingUnit()));
+        Mockito.when(commandItemRepository.save(any())).thenReturn(ConsumingUnitServiceTestBuilder.generateCommandItem());
+        try{
+            Optional <CommandItem> commandItem = commandItemService.removeCommandItemFromConsumingUnit(1L, ConsumingUnitServiceTestBuilder.generateCommandItem());
+            Assert.fail("Should not get here");
+        }catch (Exception e){
+            Assert.assertTrue(e instanceof RuntimeException);
+        }
     }
 }

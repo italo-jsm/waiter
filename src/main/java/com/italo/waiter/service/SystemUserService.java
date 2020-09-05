@@ -19,7 +19,7 @@ public class SystemUserService {
         this.systemUserRepository = systemUserRepository;
     }
 
-    public Optional<SystemUser> findProductById(Long id){
+    public Optional<SystemUser> findUserById(Long id){
         return systemUserRepository.findById(id);
     }
 
