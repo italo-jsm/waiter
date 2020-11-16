@@ -27,19 +27,19 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping
     public ResponseEntity<?> findAllProducts(){
         return ResponseEntity.ok(productService.findAllProducts());
     }
 
-    @GetMapping("{id}") @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("{id}")
     public ResponseEntity<?> findProductById(@PathVariable Long id){
         return productService.findProductById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping
     public ResponseEntity<?> saveProduct(@RequestBody Product product ) throws URISyntaxException {
         return ResponseEntity.created(new URI("/products/" + productService.saveProduct(product).getId())).build();
     }

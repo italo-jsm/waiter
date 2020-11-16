@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("consuming-units")
+@CrossOrigin("*")
 public class ConsumingUnitController {
 
     private final ConsumingUnitService consumingUnitService;

@@ -105,6 +105,6 @@ public class ConsumingUnit extends AbstractEntity{
                 .stream()
                 .map(commandItem -> commandItem.getQuantity() * commandItem.getProduct().getSaleCost())
                 .reduce(Double::sum)
-                .orElseThrow(() -> new RuntimeException("Impossible Calc"));
+                .orElse(0.0);
     }
 }
