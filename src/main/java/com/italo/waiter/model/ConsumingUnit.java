@@ -1,7 +1,6 @@
 package com.italo.waiter.model;
 
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.italo.waiter.utils.enums.UnitStatus;
 
 import javax.persistence.Entity;
@@ -11,7 +10,7 @@ import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
+
 
 @Entity
 public class ConsumingUnit extends AbstractEntity{

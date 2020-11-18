@@ -3,7 +3,7 @@ package com.italo.waiter.service;
 import com.italo.waiter.model.CommandItem;
 import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.repository.CommandItemRepository;
-import com.italo.waiter.repository.ConsumintUnitRepository;
+import com.italo.waiter.repository.ConsumingUnitRepository;
 import com.italo.waiter.service.builder.ConsumingUnitServiceTestBuilder;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,16 +23,16 @@ public class CommandItemServiceTest {
     private CommandItemRepository commandItemRepository;
 
     @Mock
-    private ConsumintUnitRepository consumintUnitRepository;
+    private ConsumingUnitRepository consumingUnitRepository;
 
     @InjectMocks
     private CommandItemService commandItemService;
 
     @Test
     public void addCommandItemToConsumingUnitShouldReturnCommandItem(){
-        Mockito.when(consumintUnitRepository.findById(any())).thenReturn(Optional.of(ConsumingUnitServiceTestBuilder.generateConsumingUnit()));
+        Mockito.when(consumingUnitRepository.findById(any())).thenReturn(Optional.of(ConsumingUnitServiceTestBuilder.generateConsumingUnit()));
         Mockito.when(commandItemRepository.save(any())).thenReturn(ConsumingUnitServiceTestBuilder.generateCommandItem());
-        Optional<CommandItem> commandItem = commandItemService.addCommandItemToConsumingUnit(1L, ConsumingUnitServiceTestBuilder.generateCommandItem());
+        Optional<CommandItem> commandItem = commandItemService.addCommandItemToConsumingUnit(1, ConsumingUnitServiceTestBuilder.generateCommandItem());
         Assert.assertTrue(commandItem.isPresent());
         ArgumentCaptor<CommandItem> commandItemArgumentCaptor = ArgumentCaptor.forClass(CommandItem.class);
         Mockito.verify(commandItemRepository).save(commandItemArgumentCaptor.capture());
@@ -43,9 +43,9 @@ public class CommandItemServiceTest {
 
     @Test
     public void addCommandItemToConsumingUnitShouldThrowEntityNotFound(){
-        Mockito.when(consumintUnitRepository.findById(any())).thenReturn(Optional.empty());
+        Mockito.when(consumingUnitRepository.findById(any())).thenReturn(Optional.empty());
         try{
-            commandItemService.addCommandItemToConsumingUnit(1L, ConsumingUnitServiceTestBuilder.generateCommandItem());
+            commandItemService.addCommandItemToConsumingUnit(1, ConsumingUnitServiceTestBuilder.generateCommandItem());
             Assert.fail("Should throw exception");
         }catch (Exception e){
             Assert.assertTrue(e instanceof EntityNotFoundException);
@@ -54,7 +54,7 @@ public class CommandItemServiceTest {
 
     @Test
     public void shouldRemoveCommandItemFromConsumingUnit(){
-        Mockito.when(consumintUnitRepository.findById(any())).thenReturn(Optional.of(ConsumingUnitServiceTestBuilder.generateConsumingUnit()));
+        Mockito.when(consumingUnitRepository.findById(any())).thenReturn(Optional.of(ConsumingUnitServiceTestBuilder.generateConsumingUnit()));
         Mockito.when(commandItemRepository.save(any())).thenReturn(ConsumingUnitServiceTestBuilder.generateCommandItem());
         Optional <CommandItem> commandItem = commandItemService.removeCommandItemFromConsumingUnit(1L, ConsumingUnitServiceTestBuilder.generateCommandItem());
         Assert.assertTrue(commandItem.isPresent());
@@ -78,7 +78,7 @@ public class CommandItemServiceTest {
 
     @Test
     public void shouldThrowExceptionWhenCommandItemIsNotFromConsumingUnit(){
-        Mockito.when(consumintUnitRepository.findById(any())).thenReturn(Optional.of(new ConsumingUnit()));
+        Mockito.when(consumingUnitRepository.findById(any())).thenReturn(Optional.of(new ConsumingUnit()));
         Mockito.when(commandItemRepository.save(any())).thenReturn(ConsumingUnitServiceTestBuilder.generateCommandItem());
         try{
             Optional <CommandItem> commandItem = commandItemService.removeCommandItemFromConsumingUnit(1L, ConsumingUnitServiceTestBuilder.generateCommandItem());

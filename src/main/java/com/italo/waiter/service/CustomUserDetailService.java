@@ -1,6 +1,5 @@
 package com.italo.waiter.service;
 
-import com.italo.waiter.model.Role;
 import com.italo.waiter.model.SystemUser;
 import com.italo.waiter.repository.SystemUserRepository;
 import org.slf4j.Logger;
@@ -15,9 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 
 @Component

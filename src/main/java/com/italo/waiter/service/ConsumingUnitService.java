@@ -4,7 +4,7 @@ import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.model.SystemUser;
 import com.italo.waiter.model.dto.ConsumingUnitDto;
 import com.italo.waiter.repository.CommandItemRepository;
-import com.italo.waiter.repository.ConsumintUnitRepository;
+import com.italo.waiter.repository.ConsumingUnitRepository;
 import com.italo.waiter.repository.SystemUserRepository;
 import com.italo.waiter.utils.enums.UnitStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +17,17 @@ import java.util.Optional;
 @Service
 public class ConsumingUnitService {
 
-    private final ConsumintUnitRepository consumintUnitRepository;
+    private final ConsumingUnitRepository consumingUnitRepository;
     private final CommandItemRepository commandItemRepository;
 
     @Autowired @Lazy
-    public ConsumingUnitService(ConsumintUnitRepository consumintUnitRepository, CommandItemRepository commandItemRepository, SystemUserRepository systemUserRepository) {
-        this.consumintUnitRepository = consumintUnitRepository;
+    public ConsumingUnitService(ConsumingUnitRepository consumingUnitRepository, CommandItemRepository commandItemRepository, SystemUserRepository systemUserRepository) {
+        this.consumingUnitRepository = consumingUnitRepository;
         this.commandItemRepository = commandItemRepository;
     }
 
     public Optional<ConsumingUnit> getConsumingUnitById(Long id){
-        return consumintUnitRepository.findById(id)
+        return consumingUnitRepository.findById(id)
             .map(consumingUnit -> {
                 consumingUnit.setCommandItems(commandItemRepository.findByConsumingUnit(consumingUnit));
                 return consumingUnit;
@@ -35,7 +35,7 @@ public class ConsumingUnitService {
     }
 
     public Optional<ConsumingUnit> openConsumingUnit(Long consumingUnitId, SystemUser systemUser){
-        return consumintUnitRepository.findById(consumingUnitId)
+        return consumingUnitRepository.findById(consumingUnitId)
                 .flatMap(consumingUnit -> {
                     consumingUnit.setStatus(UnitStatus.OPENED);
                     return Optional.of(consumingUnit);
@@ -43,10 +43,10 @@ public class ConsumingUnitService {
     }
 
     public Long createConsumingUnit(ConsumingUnitDto consumingUnitDto) {
-        return consumintUnitRepository.save(consumingUnitDto.toConsumingUnit()).getId();
+        return consumingUnitRepository.save(consumingUnitDto.toConsumingUnit()).getId();
     }
 
     public List<ConsumingUnit> getAllConsumingUnits(){
-        return consumintUnitRepository.findAll();
+        return consumingUnitRepository.findAll();
     }
 }

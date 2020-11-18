@@ -1,9 +1,8 @@
-package com.italo.waiter.model;
+package com.italo.waiter.model.dto;
 
-import javax.persistence.Entity;
+import com.italo.waiter.model.Product;
 
-@Entity
-public class Product extends AbstractEntity{
+public class ProductDto {
     private String code;
     private String description;
     private Double saleCost;
@@ -41,14 +40,12 @@ public class Product extends AbstractEntity{
         this.productionCost = productionCost;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + this.getId() +
-                "code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", saleCost=" + saleCost +
-                ", productionCost=" + productionCost +
-                '}';
+    public Product toProduct() {
+        Product product = new Product();
+        product.setCode(code);
+        product.setDescription(description);
+        product.setProductionCost(productionCost);
+        product.setSaleCost(saleCost);
+        return product;
     }
 }

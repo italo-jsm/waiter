@@ -1,8 +1,6 @@
 package com.italo.waiter.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
