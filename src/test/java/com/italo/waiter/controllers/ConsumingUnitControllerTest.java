@@ -1,6 +1,5 @@
 package com.italo.waiter.controllers;
 
-import com.italo.waiter.controllers.ConsumingUnitController;
 import com.italo.waiter.service.ConsumingUnitService;
 import com.italo.waiter.service.builder.ConsumingUnitServiceTestBuilder;
 import org.junit.Assert;

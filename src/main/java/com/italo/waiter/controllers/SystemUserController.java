@@ -7,6 +7,7 @@ import com.italo.waiter.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,14 +28,14 @@ public class SystemUserController {
         this.systemUserService = systemUserService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{id}") @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> findUserById(@PathVariable Long id){
         return systemUserService.findUserById(id)
                 .map(ResponseEntity::ok)
                 .orElseThrow(() -> new NotFoundException("Usuario nao encontrado"));
     }
 
-    @PostMapping
+    @PostMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> saveUser(@RequestBody SystemUser user){
         return systemUserRepository.findByUsername(user.getUsername())
                 .map(systemUser -> ResponseEntity.badRequest().build())
@@ -49,7 +50,7 @@ public class SystemUserController {
                 });
     }
 
-    @PutMapping
+    @PutMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateUser(@RequestBody SystemUser user){
         return Optional.ofNullable(systemUserService.updateUser(user))
                 .map(systemUser -> ResponseEntity.ok().build())

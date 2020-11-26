@@ -6,6 +6,7 @@ import com.italo.waiter.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -24,19 +25,19 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
+    @GetMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> findAllProducts(){
         return ResponseEntity.ok(productService.findAllProducts());
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{id}") @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> findProductById(@PathVariable Long id){
         return productService.findProductById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> saveProduct(@RequestBody ProductDto product ) throws URISyntaxException {
         return ResponseEntity.created(new URI("/products/" + productService.saveProduct(product.toProduct()).getId())).build();
     }

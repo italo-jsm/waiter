@@ -5,6 +5,7 @@ import com.italo.waiter.service.CommandItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -21,7 +22,7 @@ public class CommandItemController {
         this.commandItemService = commandItemService;
     }
 
-    @PostMapping("/consumingUnit/{id}")
+    @PostMapping("/consumingUnit/{id}") @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> addCommandItemToConsumingUnit(@PathVariable Integer id, @RequestBody CommandItem commandItem){
         return commandItemService.addCommandItemToConsumingUnit(id, commandItem)
                 .map(item -> ResponseEntity.ok().build())
