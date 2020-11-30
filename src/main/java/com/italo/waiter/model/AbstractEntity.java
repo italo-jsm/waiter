@@ -47,4 +47,12 @@ public abstract class AbstractEntity {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
+
+    public void setCreatedByUsername(String createdByUsername) {
+        this.createdByUsername = createdByUsername;
+    }
+
+    public void setUpdatedByUsername(String updatedByUsername) {
+        this.updatedByUsername = updatedByUsername;
+    }
 }

@@ -1,6 +1,7 @@
 package com.italo.waiter.model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Product extends AbstractEntity{

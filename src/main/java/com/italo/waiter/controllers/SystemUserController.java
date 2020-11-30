@@ -28,6 +28,11 @@ public class SystemUserController {
         this.systemUserService = systemUserService;
     }
 
+    @GetMapping
+    public ResponseEntity<?> findAllUsers(){
+        return ResponseEntity.ok(systemUserRepository.findAll());
+    }
+
     @GetMapping("{id}") @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> findUserById(@PathVariable Long id){
         return systemUserService.findUserById(id)

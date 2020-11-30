@@ -1,5 +1,6 @@
 package com.italo.waiter.controllers;
 
+import com.italo.waiter.model.Company;
 import com.italo.waiter.model.Product;
 import com.italo.waiter.model.dto.ProductDto;
 import com.italo.waiter.service.ProductService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.Principal;
 
 
 @RestController
@@ -26,7 +28,7 @@ public class ProductController {
     }
 
     @GetMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<?> findAllProducts(){
+    public ResponseEntity<?> findAllProducts(Principal principal){
         return ResponseEntity.ok(productService.findAllProducts());
     }
 
@@ -38,7 +40,7 @@ public class ProductController {
     }
 
     @PostMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<?> saveProduct(@RequestBody ProductDto product ) throws URISyntaxException {
+    public ResponseEntity<?> saveProduct(@RequestBody ProductDto product) throws URISyntaxException {
         return ResponseEntity.created(new URI("/products/" + productService.saveProduct(product.toProduct()).getId())).build();
     }
 }

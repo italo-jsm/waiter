@@ -27,7 +27,6 @@ public class SystemUserService {
         return systemUserRepository.findByUsername(user.getUsername())
                 .map(systemUser -> {
                     systemUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-                    systemUser.setRegistrationNumber(user.getRegistrationNumber());
                     return systemUserRepository.save(systemUser);
                 }).orElse(null);
     }

@@ -3,16 +3,19 @@ package com.italo.waiter.model;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class SystemUser extends AbstractEntity{
+
     private String username;
     private String password;
-    private String registrationNumber;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
+    @OneToOne
+    private Company company;
 
     public String getUsername() {
         return username;
@@ -30,14 +33,6 @@ public class SystemUser extends AbstractEntity{
         this.password = password;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
     public List<Role> getRoles() {
         return roles;
     }
@@ -46,12 +41,19 @@ public class SystemUser extends AbstractEntity{
         this.roles = roles;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     @Override
     public String toString() {
         return "SystemUser{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", registrationNumber='" + registrationNumber + '\'' +
                 '}';
     }
 }
