@@ -29,7 +29,7 @@ public class ProductController {
 
     @GetMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> findAllProducts(Principal principal){
-        return ResponseEntity.ok(productService.findAllProducts());
+        return ResponseEntity.ok(productService.findProductsByCompany(principal.getName()));
     }
 
     @GetMapping("{id}") @PreAuthorize("hasRole('ROLE_ADMIN')")
