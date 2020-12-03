@@ -29,10 +29,12 @@ public class CompanyService {
         company.getSystemUsers().forEach(systemUser -> {
             if(systemUserRepository.findByUsername(systemUser.getUsername()).isPresent()){
                 throw new ConflictException(ErrorMessage.COMPANY_SYSTEM_USER_EXISTS.getFormattedMessage());
-            }else {
-                systemUser.setCompany(company);
-                systemUserRepository.save(systemUser);
             }
+        });
+
+        company.getSystemUsers().forEach(systemUser -> {
+            systemUser.setCompany(company);
+            systemUserRepository.save(systemUser);
         });
         return companyRepository.save(company);
     }
