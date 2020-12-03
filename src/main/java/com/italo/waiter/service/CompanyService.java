@@ -27,7 +27,12 @@ public class CompanyService {
             throw new ConflictException(ErrorMessage.COMPANY_WITH_NO_USERS.getFormattedMessage());
         }
         company.getSystemUsers().forEach(systemUser -> {
-            if(systemUserRepository.findByUsername(systemUser.getUsername()).isPresent())throw new ConflictException(ErrorMessage.COMPANY_SYSTEM_USER_EXISTS.getFormattedMessage());
+            if(systemUserRepository.findByUsername(systemUser.getUsername()).isPresent()){
+                throw new ConflictException(ErrorMessage.COMPANY_SYSTEM_USER_EXISTS.getFormattedMessage());
+            }else {
+                systemUser.setCompany(company);
+                systemUserRepository.save(systemUser);
+            }
         });
         return companyRepository.save(company);
     }
