@@ -7,7 +7,6 @@ import com.italo.waiter.repository.SystemUserRepository;
 import com.italo.waiter.service.builder.CompanyServiceTestBuilder;
 import com.italo.waiter.service.builder.SystemUserTestBuilder;
 import com.italo.waiter.utils.enums.ErrorMessage;
-import com.italo.waiter.utils.exceptions.ConflictException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
