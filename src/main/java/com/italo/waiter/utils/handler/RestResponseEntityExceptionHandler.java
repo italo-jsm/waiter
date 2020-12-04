@@ -1,5 +1,6 @@
 package com.italo.waiter.utils.handler;
 
+import com.italo.waiter.utils.exceptions.ConflictException;
 import com.italo.waiter.utils.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     private ResponseEntity<?> userNotFoundException(final RuntimeException ex, final WebRequest request) {
         logger.warn("User not found");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    private ResponseEntity<?> conflictException(final RuntimeException ex, final WebRequest request) {
+        logger.warn(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
 }

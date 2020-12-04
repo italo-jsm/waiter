@@ -7,6 +7,7 @@ import com.italo.waiter.utils.enums.ErrorMessage;
 import com.italo.waiter.utils.exceptions.ConflictException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,8 +32,9 @@ public class CompanyService {
                 throw new ConflictException(ErrorMessage.COMPANY_SYSTEM_USER_EXISTS.getFormattedMessage());
             }
         });
-
+        companyRepository.save(company);
         company.getSystemUsers().forEach(systemUser -> {
+            systemUser.setPassword(new BCryptPasswordEncoder().encode(systemUser.getPassword()));
             systemUser.setCompany(company);
             systemUserRepository.save(systemUser);
         });
