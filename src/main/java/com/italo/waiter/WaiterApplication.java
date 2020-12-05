@@ -47,13 +47,13 @@ public class WaiterApplication {
 
 	Logger logger = LoggerFactory.getLogger(WaiterApplication.class);
 
-	@Bean
-	public void seedDatabase(){
-		if(roleRepository.findAll().size() == 0)roleRepository.save(new Role("ROLE_ADMIN"));
-		if(companyRepository.findAll().size() == 0)seedCompanies();
-		if(systemUserRepository.findAll().size() == 0)seedUsernames();
-		if(productRepository.findAll().size() == 0)seedProducts();
-	}
+//	@Bean
+//	public void seedDatabase(){
+//		if(roleRepository.findAll().size() == 0)roleRepository.save(new Role("ROLE_ADMIN"));
+//		if(companyRepository.findAll().size() == 0)seedCompanies();
+//		if(systemUserRepository.findAll().size() == 0)seedUsernames();
+//		if(productRepository.findAll().size() == 0)seedProducts();
+//	}
 
 
 	private void seedCompanies(){

@@ -30,7 +30,7 @@ public class CommandItemServiceTest {
 
     @Test
     public void addCommandItemToConsumingUnitShouldReturnCommandItem(){
-        Mockito.when(consumingUnitRepository.findById(any())).thenReturn(Optional.of(ConsumingUnitServiceTestBuilder.generateConsumingUnit()));
+        Mockito.when(consumingUnitRepository.findByNumber(any())).thenReturn(Optional.of(ConsumingUnitServiceTestBuilder.generateConsumingUnit()));
         Mockito.when(commandItemRepository.save(any())).thenReturn(ConsumingUnitServiceTestBuilder.generateCommandItem());
         Optional<CommandItem> commandItem = commandItemService.addCommandItemToConsumingUnit(1, ConsumingUnitServiceTestBuilder.generateCommandItem());
         Assert.assertTrue(commandItem.isPresent());
