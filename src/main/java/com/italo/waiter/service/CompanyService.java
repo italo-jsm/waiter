@@ -2,13 +2,17 @@ package com.italo.waiter.service;
 
 import com.italo.waiter.model.Company;
 import com.italo.waiter.repository.CompanyRepository;
+import com.italo.waiter.repository.RoleRepository;
 import com.italo.waiter.repository.SystemUserRepository;
 import com.italo.waiter.utils.enums.ErrorMessage;
 import com.italo.waiter.utils.exceptions.ConflictException;
+import com.italo.waiter.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyService {
@@ -17,10 +21,13 @@ public class CompanyService {
 
     private final SystemUserRepository systemUserRepository;
 
+    private final RoleRepository roleRepository;
+
     @Autowired @Lazy
-    public CompanyService(CompanyRepository companyRepository, SystemUserRepository systemUserRepository) {
+    public CompanyService(CompanyRepository companyRepository, SystemUserRepository systemUserRepository, RoleRepository roleRepository) {
         this.companyRepository = companyRepository;
         this.systemUserRepository = systemUserRepository;
+        this.roleRepository = roleRepository;
     }
 
     public Company saveCompany(Company company) {
@@ -36,6 +43,11 @@ public class CompanyService {
         company.getSystemUsers().forEach(systemUser -> {
             systemUser.setPassword(new BCryptPasswordEncoder().encode(systemUser.getPassword()));
             systemUser.setCompany(company);
+            systemUser.setRoles(
+                    systemUser.getRoles()
+                    .stream()
+                    .map(role -> roleRepository.findByName(role.getName()).orElseThrow(() -> new NotFoundException(ErrorMessage.ROLE_NOT_FOUND.getFormattedMessage()))).collect(Collectors.toList())
+            );
             systemUserRepository.save(systemUser);
         });
         return companyRepository.save(company);

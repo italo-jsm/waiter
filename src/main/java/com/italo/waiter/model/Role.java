@@ -20,12 +20,4 @@ public class Role extends AbstractEntity{
 
 	public Role() {
 	}
-
-	@Override
-	public String toString() {
-		return "Role{" +
-				"id=" + this.getId().toString() + '\'' +
-				"name='" + name + '\'' +
-				'}';
-	}
 }

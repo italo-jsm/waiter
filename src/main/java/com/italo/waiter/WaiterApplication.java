@@ -27,7 +27,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 @SpringBootApplication
-public class WaiterApplication {
+public class WaiterApplication implements CommandLineRunner{
 
 	public static void main(String[] args) {
 		SpringApplication.run(WaiterApplication.class, args);
@@ -105,5 +105,9 @@ public class WaiterApplication {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
 	}
 }
