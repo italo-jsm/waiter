@@ -4,6 +4,7 @@ import com.italo.waiter.model.CommandItem;
 import com.italo.waiter.model.ConsumingUnit;
 import com.italo.waiter.repository.CommandItemRepository;
 import com.italo.waiter.repository.ConsumingUnitRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -11,19 +12,13 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class CommandItemService {
 
     private final CommandItemRepository commandItemRepository;
 
     private final ConsumingUnitRepository consumingUnitRepository;
-
-    @Autowired @Lazy
-    public CommandItemService(CommandItemRepository commandItemRepository, ConsumingUnitRepository consumingUnitRepository) {
-        this.commandItemRepository = commandItemRepository;
-        this.consumingUnitRepository = consumingUnitRepository;
-    }
-
 
     public Optional<CommandItem> addCommandItemToConsumingUnit(final Integer consumingUnitNumber, final CommandItem commandItem){
         return consumingUnitRepository.findByNumber(consumingUnitNumber)

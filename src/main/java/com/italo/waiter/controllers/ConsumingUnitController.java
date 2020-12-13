@@ -2,6 +2,7 @@ package com.italo.waiter.controllers;
 
 import com.italo.waiter.model.dto.ConsumingUnitDto;
 import com.italo.waiter.service.ConsumingUnitService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("consuming-units")
 @CrossOrigin("*")
@@ -20,11 +22,6 @@ public class ConsumingUnitController {
 
     private final ConsumingUnitService consumingUnitService;
     private final Logger logger = LoggerFactory.getLogger("ConsumingUnitController");
-
-    @Autowired @Lazy
-    public ConsumingUnitController(ConsumingUnitService consumingUnitService) {
-        this.consumingUnitService = consumingUnitService;
-    }
 
     @GetMapping("/{id}") @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getOneConsumingUnit(@PathVariable Long id){

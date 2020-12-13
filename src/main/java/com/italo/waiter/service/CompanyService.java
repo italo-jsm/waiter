@@ -7,6 +7,7 @@ import com.italo.waiter.repository.SystemUserRepository;
 import com.italo.waiter.utils.enums.ErrorMessage;
 import com.italo.waiter.utils.exceptions.ConflictException;
 import com.italo.waiter.utils.exceptions.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class CompanyService {
 
@@ -22,13 +24,6 @@ public class CompanyService {
     private final SystemUserRepository systemUserRepository;
 
     private final RoleRepository roleRepository;
-
-    @Autowired @Lazy
-    public CompanyService(CompanyRepository companyRepository, SystemUserRepository systemUserRepository, RoleRepository roleRepository) {
-        this.companyRepository = companyRepository;
-        this.systemUserRepository = systemUserRepository;
-        this.roleRepository = roleRepository;
-    }
 
     public Company saveCompany(Company company) {
         if(company.getSystemUsers().isEmpty()){

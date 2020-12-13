@@ -2,6 +2,7 @@ package com.italo.waiter.service;
 
 import com.italo.waiter.model.SystemUser;
 import com.italo.waiter.repository.SystemUserRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
+@RequiredArgsConstructor
 @Component
 public class CustomUserDetailService implements UserDetailsService {
 
 	private final SystemUserRepository systemUserRepository;
-	Logger logger = LoggerFactory.getLogger(CustomUserDetailService.class);
-
-	@Autowired @Lazy
-	public CustomUserDetailService(SystemUserRepository systemUserRepository) {
-		this.systemUserRepository = systemUserRepository;
-	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -38,8 +34,7 @@ public class CustomUserDetailService implements UserDetailsService {
 		}
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
 				.createAuthorityList(rolesAsString);
-		User admin = new User(user.getUsername(), user.getPassword(), grantedAuthorities);
-		return admin;
+		return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
 	}
 
 }

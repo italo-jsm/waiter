@@ -4,6 +4,7 @@ import com.italo.waiter.model.Company;
 import com.italo.waiter.model.Product;
 import com.italo.waiter.model.dto.ProductDto;
 import com.italo.waiter.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.Principal;
 
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/products")
 @CrossOrigin("*")
@@ -24,11 +25,6 @@ public class ProductController {
 
     private final ProductService productService;
     private final Logger logger = LoggerFactory.getLogger("ProductController");
-
-    @Autowired @Lazy
-    public ProductController(final ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> findAllProducts(Principal principal){

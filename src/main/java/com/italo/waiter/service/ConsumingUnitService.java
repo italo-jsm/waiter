@@ -7,6 +7,7 @@ import com.italo.waiter.repository.CommandItemRepository;
 import com.italo.waiter.repository.ConsumingUnitRepository;
 import com.italo.waiter.repository.SystemUserRepository;
 import com.italo.waiter.utils.enums.UnitStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -14,17 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class ConsumingUnitService {
 
     private final ConsumingUnitRepository consumingUnitRepository;
     private final CommandItemRepository commandItemRepository;
-
-    @Autowired @Lazy
-    public ConsumingUnitService(ConsumingUnitRepository consumingUnitRepository, CommandItemRepository commandItemRepository, SystemUserRepository systemUserRepository) {
-        this.consumingUnitRepository = consumingUnitRepository;
-        this.commandItemRepository = commandItemRepository;
-    }
 
     public Optional<ConsumingUnit> getConsumingUnitById(Long id){
         return consumingUnitRepository.findById(id)
