@@ -1,9 +1,13 @@
 package com.italo.waiter.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Data
 public class Address extends AbstractEntity{

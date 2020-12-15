@@ -2,7 +2,7 @@ package com.italo.waiter.model;
 
 
 import com.italo.waiter.utils.enums.UnitStatus;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 @Entity
 public class ConsumingUnit extends AbstractEntity{

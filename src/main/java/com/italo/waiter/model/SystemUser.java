@@ -1,6 +1,6 @@
 package com.italo.waiter.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +9,10 @@ import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 @Entity
 public class SystemUser extends AbstractEntity{
