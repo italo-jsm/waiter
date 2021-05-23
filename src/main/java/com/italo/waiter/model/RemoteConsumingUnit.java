@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
